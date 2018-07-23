@@ -23,7 +23,7 @@ There's the barest sketch of a server.js, and webpack-dev-server knows how to pr
 
 Linter
 
-Tet-runner, sample tests, etc.
+Test-runner, sample tests, etc.
 
 Might make sense to add a client dir and a server dir and have them separate.
 
@@ -38,6 +38,6 @@ Currently we can production-build with just `yarn run webpack`.  This is a bit p
 Thanks to:
 
 * [David VanDusen](https://github.com/davidvandusen/react-webpack-boilerplate)
-* Karl Jensen
+* [Karl Jensen](https://github.com/jensen/webpack-notes)
 
 

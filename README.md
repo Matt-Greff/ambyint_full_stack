@@ -1,4 +1,4 @@
-
+This template was made by the sources listed below, overtime I am adding features to this boilerplate to make it my go to for react endeavors. 
 
 This is a template for setting up webpack, for use with babel and generally for use with React &c.
 
@@ -39,5 +39,6 @@ Thanks to:
 
 * [David VanDusen](https://github.com/davidvandusen/react-webpack-boilerplate)
 * [Karl Jensen](https://github.com/jensen/webpack-notes)
+* [Jeremy Holman](https://github.com/jholman/web-boilerplate)
 
 

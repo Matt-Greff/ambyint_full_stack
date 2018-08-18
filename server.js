@@ -12,6 +12,7 @@ const exampleRoute   = require('./routes/example.js'  );
 
 const app = express();
 app.use(express.static('build/public'));
+app.use(express.static('build/js'));
 app.use(bodyParser.urlencoded({
   extended: false
 }));

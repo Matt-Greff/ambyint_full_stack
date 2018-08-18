@@ -1,4 +1,4 @@
-This template was made by the sources listed below, overtime I am adding features to this boilerplate to make it my go to for react endeavors. 
+This template was based on a boilplate made by the sources listed below, overtime I am adding features to this boilerplate to make it my go to for react endeavors and others who find this preliminary setup useful.
 
 This is a template for setting up webpack, for use with babel and generally for use with React &c.
 
@@ -18,6 +18,9 @@ It knows how to parse CSS/SCSS/SASS, as long as that is `require`d somewhere in 
 
 There's the barest sketch of a server.js, and webpack-dev-server knows how to proxy `/api` to it.
 
+The api has one mock route setup to it, it is structured to be adapted to any database with minor changes.
+
+This boilerplate supports async and await out of the box (among other ESNEXT features)
 
 ## Wishlist
 

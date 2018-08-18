@@ -8,7 +8,7 @@ module.exports = {
 
   // https://webpack.js.org/configuration/output/
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build', 'js'),
     filename: 'bundle.js'
   },
 
@@ -27,7 +27,6 @@ module.exports = {
 
   module: {
     rules: [
-
       // https://webpack.js.org/loaders/babel-loader/
       {
         test: /\.jsx?$/,

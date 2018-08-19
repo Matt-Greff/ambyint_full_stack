@@ -11,12 +11,12 @@ Webpack is currently working, and `yarn dev` will bring up the webpack-dev-serve
 
 Babel is configured in `.babelrc`.
 
-As a demo app, we currently edit the DOM two different ways: vanillajs and also React.  See `src/index.jsx`,
-`src/vanilla_dom_edit`, and `src/App.jsx`.
+As a demo app, we currently edit the DOM two different ways: vanillajs and also React.  See `client/src/index.jsx`,
+`client/src/vanilla_dom_edit`, and `client/src/App.jsx`.
 
 It knows how to parse CSS/SCSS/SASS, as long as that is `require`d somewhere in the dependency tree.
 
-There's the barest sketch of a server.js, and webpack-dev-server knows how to proxy `/api` to it.
+There's the barest sketch of a server file, and webpack-dev-server knows how to proxy `/api` to it.
 
 The api has one mock route, it is structured to be adapted to any database with minor changes.
 
@@ -34,7 +34,7 @@ Might make sense to add a client dir and a server dir and have them separate.
 ### Secondly
 
 Currently we can production-build with just `yarn build`.  This is a bit primitive.
-  1) public files are being copied to build, but this could be a tid bit more elegant than `cp -r src/public/* build/public/`.
+  1) public files are being copied to build, but this could be a tid bit more elegant than `cp -r client/src/public/* client/build/public/`.
   2) if I add a server directory with passthrough, the prod-build version of that will be quite different.
 
 ---

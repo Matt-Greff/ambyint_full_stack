@@ -1,15 +1,18 @@
 const webpack = require('webpack');
 const path = require('path');
-require("babel-core/register");
+require('babel-core/register');
 
 module.exports = {
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   mode: 'development',
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './src/index.jsx'],
 
   // https://webpack.js.org/configuration/output/
   output: {
     path: path.resolve(__dirname, 'build', 'js'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   // https://webpack.js.org/configuration/devtool/#devtool
@@ -20,9 +23,9 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'src/public'),
     host: '0.0.0.0',
     proxy: {
-      '/api': 'http://localhost:8081'
+      '/api': 'http://localhost:8081',
     },
-    historyApiFallback: true
+    historyApiFallback: true,
   },
 
   module: {
@@ -32,33 +35,33 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
 
       // https://webpack.js.org/loaders/sass-loader/
       {
         test: /\.(c|sa|sc)ss$/,
         use: [{
-          loader: 'style-loader'
+          loader: 'style-loader',
         }, {
-          loader: 'css-loader'
+          loader: 'css-loader',
         }, {
-          loader: 'sass-loader'
-        }]
+          loader: 'sass-loader',
+        }],
       },
 
       {
         test: /\.(jpeg|png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader'
+        loader: 'file-loader',
       },
-    ]
+    ],
   },
 
   plugins: [
     new webpack.ProvidePlugin({
       // $: 'jquery',
       _: 'lodash',
-    })
-  ]
+    }),
+  ],
 };

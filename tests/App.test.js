@@ -1,4 +1,4 @@
 import React from 'react';
-import App from './../src/App.jsx';
+import App from '../src/App';
 
-test('renders without error', () => {})
+test('renders without error', () => {});

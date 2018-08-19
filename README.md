@@ -11,7 +11,7 @@ Webpack is currently working, and `yarn dev` will bring up the webpack-dev-serve
 
 Babel is configured in `.babelrc`.
 
-As a demo app, we currently edit the DOM two different ways: vanillajs and also React.  See `src/index.js`,
+As a demo app, we currently edit the DOM two different ways: vanillajs and also React.  See `src/index.jsx`,
 `src/vanilla_dom_edit`, and `src/App.jsx`.
 
 It knows how to parse CSS/SCSS/SASS, as long as that is `require`d somewhere in the dependency tree.

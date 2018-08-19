@@ -5,8 +5,7 @@
   "main": "server.js",
   "description": "webpack/babel/etc recipes for starting new projects",
   "scripts": {
-    "build": "webpack-cli",
-    "build2": "cp -r src/public/* build && webpack-cli",
+    "build": "cp -r src/public/* build/public && webpack-cli",
     "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server.js\"",
     "test": "jest --watch",
     "start": "node server.js",

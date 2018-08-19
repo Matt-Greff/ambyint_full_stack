@@ -2,13 +2,13 @@
   "name": "boilerplate",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
+  "main": "server/index.js",
   "description": "webpack/babel/etc recipes for starting new projects",
   "scripts": {
-    "build": "cp -r src/public/* build/public && webpack-cli",
-    "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server.js\"",
+    "build": "cp -r client/src/public/* client/build/public && webpack-cli",
+    "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server/index.js\"",
     "test": "jest --watch",
-    "start": "node server.js",
+    "start": "node server/index.js",
     "postinstall": "npm run build"
   },
   "author": "Jeremy Holman <jeremy.holman@gmail.com>",
@@ -32,12 +32,12 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "node-sass": "^4.9.0",
+    "prop-types": "^15.6.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
-    "prop-types": "^15.6.2",
     "webpack-cli": "^2.0.15"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "eslint-plugin-react": "^7.11.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.5.0",
-    "nodemon": "^1.17.4",
+    "nodemon": "^1.18.3",
     "react-test-renderer": "^16.4.2",
     "webpack-dev-server": "^3.1.3"
   }

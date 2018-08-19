@@ -8,8 +8,13 @@
     "build": "cp -r client/src/public/* client/build/public && webpack-cli",
     "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server/index.js\"",
     "test": "jest --watch",
+    "test-react": "jest --watch",
+    "test-express": "",
     "start": "node server/index.js",
     "postinstall": "npm run build"
+  },
+  "engines": {
+    "node": "8.11.4"
   },
   "author": "Jeremy Holman <jeremy.holman@gmail.com>",
   "license": "UNLICENSED",

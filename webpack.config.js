@@ -7,11 +7,11 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   mode: 'development',
-  entry: ['babel-polyfill', './src/index.jsx'],
+  entry: ['babel-polyfill', './client/src/index.jsx'],
 
   // https://webpack.js.org/configuration/output/
   output: {
-    path: path.resolve(__dirname, 'build', 'js'),
+    path: path.resolve(__dirname, 'client', 'build', 'js'),
     filename: 'bundle.js',
   },
 
@@ -20,7 +20,7 @@ module.exports = {
 
   // https://webpack.js.org/configuration/dev-server/
   devServer: {
-    contentBase: path.resolve(__dirname, 'src/public'),
+    contentBase: path.resolve(__dirname, 'client/src/public'),
     host: '0.0.0.0',
     proxy: {
       '/api': 'http://localhost:8081',

@@ -27,16 +27,14 @@ Jest is supported, basic test demonstrated.
 ## Wishlist
 
 ### Firstly
-Add Enzyme to testing suite.
-
-Add Example test for backend.
+Add Enzyme to testing suite, also an example test for the backend.
 
 Might make sense to add a client dir and a server dir and have them separate.
 
 ### Secondly
 
 Currently we can production-build with just `yarn build`.  This is a bit primitive.
-  1) public files are being copied to build, but this could be a tid bit more elegant than `cp -r src/public build/public/`.
+  1) public files are being copied to build, but this could be a tid bit more elegant than `cp -r src/public/* build/public/`.
   2) if I add a server directory with passthrough, the prod-build version of that will be quite different.
 
 ---

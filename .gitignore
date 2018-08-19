@@ -1,6 +1,6 @@
 node_modules
-build/public
-build/js
+client/build/public/*
+client/build/js/*
 .env
 
 yarn-error.log

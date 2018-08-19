@@ -1,7 +1,7 @@
-
 node_modules
-build/*
-
+build/public
+build/js
+.env
 
 yarn-error.log
 npm-error.log

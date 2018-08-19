@@ -18,23 +18,26 @@ It knows how to parse CSS/SCSS/SASS, as long as that is `require`d somewhere in 
 
 There's the barest sketch of a server.js, and webpack-dev-server knows how to proxy `/api` to it.
 
-The api has one mock route setup to it, it is structured to be adapted to any database with minor changes.
+The api has one mock route, it is structured to be adapted to any database with minor changes.
 
-This boilerplate supports async and await out of the box (among other ESNEXT features)
+Linter is supported with Airbnb presets.
+
+Jest is supported, basic test demonstrated.
 
 ## Wishlist
 
-Linter
+### Firstly
+Add Enzyme to testing suite.
 
-Test-runner, sample tests, etc.
+Add Example test for backend.
 
 Might make sense to add a client dir and a server dir and have them separate.
 
-Currently we can production-build with just `yarn run webpack`.  This is a bit primitive.
-  1) probably it should copy the public files as well, over to build
-  2) if I add a server directory with passthrough, the prod-build version of that will be quite different
+### Secondly
 
-
+Currently we can production-build with just `yarn build`.  This is a bit primitive.
+  1) public files are being copied to build, but this could be a tid bit more elegant than `cp -r src/public build/public/`.
+  2) if I add a server directory with passthrough, the prod-build version of that will be quite different.
 
 ---
 
@@ -43,5 +46,3 @@ Thanks to:
 * [David VanDusen](https://github.com/davidvandusen/react-webpack-boilerplate)
 * [Karl Jensen](https://github.com/jensen/webpack-notes)
 * [Jeremy Holman](https://github.com/jholman/web-boilerplate)
-
-

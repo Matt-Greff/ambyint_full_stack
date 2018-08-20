@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Button from './ExampleButton';
+import Map from './Map';
 
-require('./styles/first.css');
-require('./styles/second.sass');
-require('./styles/third.scss');
+require('./styles/app.sass');
 
 export default class App extends Component {
   constructor(props) {
@@ -27,10 +26,11 @@ export default class App extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div>
+      <div style={{ height: '100%', width: '100%' }}>
         <div className="third stuff">{this.words}</div>
         <Button apiCall={this.apiCall} />
         <p>{data}</p>
+        <Map />
       </div>);
   }
 }

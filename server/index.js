@@ -27,3 +27,5 @@ app.use(fallback('index.html', { root }));
 
 // can be GETted through the webpack-dev-server at localhost:8080/api
 app.listen(PORT, () => { console.log(`server is up :) ${PORT} ${ENV}`); });
+
+module.exports = app;

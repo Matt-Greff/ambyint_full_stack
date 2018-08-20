@@ -4,6 +4,20 @@ This is a template for setting up webpack, for use with babel and generally for 
 
 It assumes `yarn` rather than npm, though I suspect it doesn't really matter.
 
+## To Start
+
+copy example environment to local environment and install dependencies.
+`cp config/.example.env .env && yarn install`
+
+To start dev server.
+`yarn dev`
+
+To start server.
+`yarn start`
+
+To make a new build for the server.
+`yarn build`
+(a build is also made post `yarn install` for ease of deployment.)
 
 ## Currently Working
 

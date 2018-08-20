@@ -17,6 +17,10 @@ To make a new build for the server.
 `yarn build`
 (a build is also made post `yarn install` for ease of deployment.)
 
+## Upcoming
+
+I based the preliminary webpack layout from the sources listed below but due to me wanting to make this boilerplate from the ground up I may soon switch repositories and begin developing the webpack layout from scratch, once that happens I will list the link to the repo here. It will incorporate a very similar design and attention to testing both front end and backend, being deployment ready, demonstrated routes, and having good practices with react garunteed(linted).
+
 ## Currently Working
 
 Webpack is currently working, and `yarn dev` will bring up the webpack-dev-server.
@@ -54,9 +58,6 @@ Currently we can production-build with just `yarn build`.  This is a bit primiti
   1) public files are being coppied to build, but this could be a tid bit more elegant than `cp -r client/src/public/* client/build/public/` within the build script, I believe webpack has a package that allows you to copy directories but needs further looking into.
   2) if I add a server directory with passthrough, the prod-build version of that will be quite different.
 
-## Upcoming
-
-I based the preliminary webpack layout from the sources listed below but due to me wanting to make this boilerplate from the ground up I may soon switch repositories and begin developing the webpack layout from scratch, once that happens I will list the link to the repo here. It will incorporate a very similar design and attention to testing both front end and backend, being deployment ready, demonstrated routes, and having good practices with react garunteed(linted).
 ---
 
 Thanks to:

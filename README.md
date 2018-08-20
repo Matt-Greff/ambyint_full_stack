@@ -22,14 +22,14 @@ The api has one mock route, it is structured to be adapted to any database with 
 
 Linter is supported with Airbnb presets.
 
-Jest is supported, basic test demonstrated.
+Barest sketch of test files for unit testing, use `yarn test` to run both backend and front end tests, or `yarn test-react`, or `yarn test-express` to test the front-end and back-end seperately.
+
+The current file structure is somewhat opinionated, it is really just to give an idea of a possible solution to a react and express structured project.
 
 ## Wishlist
 
 ### Firstly
-Add Enzyme to testing suite, also an example test for the backend.
-
-Might make sense to add a client dir and a server dir and have them separate.
+Add Enzyme to testing suite.
 
 ### Secondly
 

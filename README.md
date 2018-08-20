@@ -1,6 +1,4 @@
-This template was based on a boilplate made by the sources listed below, overtime I am adding features to this boilerplate to make it my go to for react endeavors and others who find this preliminary setup useful.
-
-This is a template for setting up webpack, for use with babel and generally for use with React &c.
+This is a template for setting up webpack, for use with babel and generally for use with React, and Express.
 
 It assumes `yarn` rather than npm, though I suspect it doesn't really matter.
 
@@ -43,14 +41,22 @@ The current file structure is somewhat opinionated, it is really just to give an
 ## Wishlist
 
 ### Firstly
+
 Add Enzyme to testing suite.
 
 ### Secondly
 
-Currently we can production-build with just `yarn build`.  This is a bit primitive.
-  1) public files are being copied to build, but this could be a tid bit more elegant than `cp -r client/src/public/* client/build/public/`.
+Example tests are extremely basic in nature, maybe some more detail orientated tests could be demonstrated.
+
+Linter is straight from Airbnb, there is a high chance of me customizing the linter in the future.
+
+Currently we can production-build with just `yarn build`.  This is a bit primitive in nature.
+  1) public files are being coppied to build, but this could be a tid bit more elegant than `cp -r client/src/public/* client/build/public/` within the build script, I believe webpack has a package that allows you to copy directories but needs further looking into.
   2) if I add a server directory with passthrough, the prod-build version of that will be quite different.
 
+## Upcoming
+
+I based the preliminary webpack layout from the sources listed below but due to me wanting to make this boilerplate from the ground up I may soon switch repositories and begin developing the webpack layout from scratch, once that happens I will list the link to the repo here. It will incorporate a very similar design and attention to testing both front end and backend, being deployment ready, demonstrated routes, and having good practices with react garunteed(linted).
 ---
 
 Thanks to:

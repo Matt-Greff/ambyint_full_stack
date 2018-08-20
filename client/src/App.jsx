@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from './ExampleButton';
+import Menu from './Menu';
 import Map from './Map';
 
 require('./styles/app.sass');
@@ -7,7 +7,6 @@ require('./styles/app.sass');
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.words = 'some third words';
     this.state = {
       data: 'press button to make api call',
     };
@@ -26,10 +25,8 @@ export default class App extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div style={{ height: '100%', width: '100%' }}>
-        <div className="third stuff">{this.words}</div>
-        <Button apiCall={this.apiCall} />
-        <p>{data}</p>
+      <div id="view-port">
+        <Menu apiCall={this.apiCall} />
         <Map />
       </div>);
   }

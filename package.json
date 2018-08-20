@@ -1,11 +1,11 @@
 {
-  "name": "boilerplate",
+  "name": "ambyint_full_stack",
   "version": "0.1.0",
   "private": true,
   "main": "server/index.js",
-  "description": "webpack/babel/etc recipes for starting new projects",
+  "description": "full stack react code challenge",
   "scripts": {
-    "build": "cp -r client/src/public/* client/build/public && webpack-cli",
+    "build": "cp -r client/src/public client/build/public && webpack-cli",
     "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server/index.js\"",
     "test": "jest --watch && mocha server/tests/*",
     "test-react": "jest --watch",
@@ -16,7 +16,7 @@
   "engines": {
     "node": "8.11.4"
   },
-  "author": "Jeremy Holman <jeremy.holman@gmail.com>",
+  "author": "Matti Greff <matti.greff@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
     "autobind-decorator": "^2.1.0",

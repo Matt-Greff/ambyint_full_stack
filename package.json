@@ -7,9 +7,9 @@
   "scripts": {
     "build": "cp -r client/src/public/* client/build/public && webpack-cli",
     "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server/index.js\"",
-    "test": "jest --watch",
+    "test": "jest --watch && mocha server/tests/*",
     "test-react": "jest --watch",
-    "test-express": "",
+    "test-express": "mocha server/tests/*",
     "start": "node server/index.js",
     "postinstall": "npm run build"
   },
@@ -47,6 +47,8 @@
   },
   "devDependencies": {
     "babel-jest": "^23.4.2",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "concurrently": "^3.5.1",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -55,6 +57,7 @@
     "eslint-plugin-react": "^7.11.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.5.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
     "react-test-renderer": "^16.4.2",
     "webpack-dev-server": "^3.1.3"

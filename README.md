@@ -1,29 +1,31 @@
-This is a template for setting up webpack, for use with babel and generally for use with React, and Express.
+## Description
 
-It assumes `yarn` rather than npm, though I suspect it doesn't really matter.
+- a UI which will display a number of addresses retrieved from an api endpoint
 
 ## To Start
 
 copy example environment to local environment and install dependencies.
 `cp config/.example.env .env && yarn install`
 
-To start dev server.
+To start webpack-dev server and express server cuncurrently.
 `yarn dev`
 
-To start server.
+To start express-server.
 `yarn start`
 
-To make a new build for the server.
+To make a new build for express to serve.
 `yarn build`
 (a build is also made post `yarn install` for ease of deployment.)
 
+## To Test
+
+`yarn test` will run full testing suite back to back (Jest, Mocha)
+
+`yarn test-react` and `yarn test-express` will test front-end and back-end tests respectively.
+
 ## Upcoming
-
-I based the preliminary webpack layout from the sources listed below but due to me wanting to make this boilerplate from the ground up I may soon switch repositories and begin developing the webpack layout from scratch, once that happens I will list the link to the repo here. It will incorporate a very similar design and attention to testing both front end and backend, being deployment ready, demonstrated routes, and having good practices with react garunteed(linted).
-
+... lots of coding needed.
 ## Currently Working
-
-Webpack is currently working, and `yarn dev` will bring up the webpack-dev-server.
 
 Babel is configured in `.babelrc`.
 
@@ -44,24 +46,20 @@ The current file structure is somewhat opinionated, it is really just to give an
 
 ## Wishlist
 
-### Firstly
+### Functional Requirements
+- Server
+    - Geocode the items in the provided `addresses.csv` file by using the [Google Geocode API](https://developers.google.com/maps/documentation/javascript/geocoding)
+    - Add any necessary api endpoints that allow you to fulfill the requirements of the client
+- Client
+    - Only display items that result in a rooftop location type
+    - Allow toggling between a list view and a map view of the results
+    - Allow searching for a full/partial address in the results
+        - `123 Rick Street` should return when searching for `Rick`
 
-Add Enzyme to testing suite.
-
-### Secondly
-
-Example tests are extremely basic in nature, maybe some more detail orientated tests could be demonstrated.
-
-Linter is straight from Airbnb, there is a high chance of me customizing the linter in the future.
-
-Currently we can production-build with just `yarn build`.  This is a bit primitive in nature.
-  1) public files are being coppied to build, but this could be a tid bit more elegant than `cp -r client/src/public/* client/build/public/` within the build script, I believe webpack has a package that allows you to copy directories but needs further looking into.
-  2) if I add a server directory with passthrough, the prod-build version of that will be quite different.
+### Wouldn't It Be Cool If...
+- Responsive design
+- More to come...
 
 ---
-
-Thanks to:
-
-* [David VanDusen](https://github.com/davidvandusen/react-webpack-boilerplate)
-* [Karl Jensen](https://github.com/jensen/webpack-notes)
-* [Jeremy Holman](https://github.com/jholman/web-boilerplate)
+Based on:
+* [Boilerplate/template](https://github.com/matt-greff/web-boilerplate)

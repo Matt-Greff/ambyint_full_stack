@@ -13,16 +13,15 @@ export default class App extends Component {
       mapVisible: true,
       addresses: ['one', 'two'],
     };
-    this.apiCall = this.apiCall.bind(this);
     this.switchView = this.switchView.bind(this);
   }
 
-  async apiCall() {
-    this.setState({ data: 'fetching data from fake db' });
-    const response = await fetch('/api/example');
-    const { data } = await response.json();
+  async componentDidMount() {
+    this.setState({ addresses: ['fetching data from fake db'] });
+    const response = await fetch('/api/addresses');
+    const addresses = await response.json();
     this.setState({
-      data,
+      addresses,
     });
   }
 

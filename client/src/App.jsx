@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
 import Map from './Map';
+import List from './List';
+import 'bootstrap/dist/css/bootstrap.css';
 
 require('./styles/app.sass');
 
@@ -8,9 +10,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: 'press button to make api call',
+      mapVisible: true,
+      addresses: ['one', 'two'],
     };
     this.apiCall = this.apiCall.bind(this);
+    this.switchView = this.switchView.bind(this);
   }
 
   async apiCall() {
@@ -22,12 +26,24 @@ export default class App extends Component {
     });
   }
 
+  switchView() {
+    const { mapVisible } = this.state;
+    this.setState({
+      mapVisible: !mapVisible,
+    });
+  }
+
   render() {
-    const { data } = this.state;
+    const { apiCall, switchView } = this;
+    const { mapVisible, addresses } = this.state;
     return (
       <div id="view-port">
-        <Menu apiCall={this.apiCall} />
-        <Map />
+        <Menu switchView={switchView} apiCall={apiCall} />
+        {mapVisible ? (
+          <Map />
+        ) : (
+          <List addresses={addresses} />
+        )}
       </div>);
   }
 }

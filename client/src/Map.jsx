@@ -9,7 +9,7 @@ export default function () {
       id="map"
     >
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo' }}
+        bootstrapURLKeys={{ key: 'AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM' }}
         defaultCenter={{ lat: 59.95, lng: 30.33 }}
         defaultZoom={11}
       >

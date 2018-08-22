@@ -10,10 +10,13 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mapVisible: true,
-      addresses: ['one', 'two'],
+      listVisible: true,
+      addresses: ['Loading...'],
+      query: '',
     };
     this.switchView = this.switchView.bind(this);
+    this.filterResults = this.filterResults.bind(this);
+    this.searchBarTyping = this.searchBarTyping.bind(this);
   }
 
   async componentDidMount() {
@@ -26,23 +29,35 @@ export default class App extends Component {
   }
 
   switchView() {
-    const { mapVisible } = this.state;
+    const { listVisible } = this.state;
     this.setState({
-      mapVisible: !mapVisible,
+      listVisible: !listVisible,
+    });
+  }
+
+  async searchBarTyping(e) {
+    const { value } = e.target;
+    await this.setState({ query: value });
+    this.filterResults();
+  }
+
+  async filterResults() {
+    const { query } = this.state;
+    const response = await fetch(`/api/addresses?query=${query}`);
+    const addresses = await response.json();
+    this.setState({
+      addresses,
     });
   }
 
   render() {
-    const { apiCall, switchView } = this;
-    const { mapVisible, addresses } = this.state;
+    const { searchBarTyping, switchView } = this;
+    const { listVisible, addresses, query } = this.state;
     return (
       <div id="view-port">
-        <Menu switchView={switchView} apiCall={apiCall} />
-        {mapVisible ? (
-          <Map />
-        ) : (
-          <List addresses={addresses} />
-        )}
+        <Menu switchView={switchView} searchBarTyping={searchBarTyping} query={query} />
+        <Map />
+        <List listVisible={listVisible} addresses={addresses} />
       </div>);
   }
 }

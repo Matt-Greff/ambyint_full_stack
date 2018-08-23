@@ -3,68 +3,58 @@ const parse = require('csv-parse');
 const axios = require('axios');
 
 module.exports = {
-  all() {
-    return new Promise((resolve, reject) => {
+  csvHandler({ query }) {
+    const { csvFilter, queryFilter } = this;
+    return new Promise((res, rej) => {
       const csvData = new Set();
       fs.createReadStream(`${__dirname}/addresses.csv`)
         .pipe(parse())
-        .on('data', async (csvrow) => {
-          csvData.add(csvrow[0]);
+        .on('data', async (csvRow) => {
+          // query and parse characters on read to stop redundant api calls
+          const filteredRow = csvFilter(csvRow[0]);
+          if (filteredRow && (!query || queryFilter(filteredRow, query))) csvData.add(filteredRow);
         })
-        .on('error', e => reject(e))
-        .on('end', () => resolve([...csvData]));
+        .on('error', e => rej(e))
+        .on('end', () => res([...csvData]));
     });
   },
   queryFilter(addr, query) {
     const regExp = new RegExp(query, 'gi');
-    return addr.formatted_address.match(regExp);
+    return addr.match(regExp);
   },
-  charFilter(addr) {
+  csvFilter(addr) {
     return addr.replace(/“(.*)”/g, '$1');
   },
-  async getGeocode(addr) {
-    try {
-      const { data } = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM`);
-      const { results } = data;
-      const { formatted_address, geometry } = results[0];
-      const { location, location_type } = geometry;
-      const geocodedAddr = {
-        formatted_address,
-        location,
-        location_type,
-      };
-      return geocodedAddr;
-    } catch (e) {
-      return console.log(e);
-    }
+  getGeocode(addr) {
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM`)
+      .then(({ data }) => {
+        const { results, status } = data;
+        if (data.status !== 'OK') return { status };
+        const { formatted_address, geometry } = results[0];
+        const { location, location_type } = geometry;
+        const geocodedAddr = {
+          formatted_address,
+          location,
+          location_type,
+          status,
+        };
+        return geocodedAddr;
+      }, err => new Error(err));
   },
   validAddrType(addr, type) {
     return addr.location_type === type;
   },
-  async addrFilter(arr, { query }) {
-    const processedArr = [];
-    this.charFilter = this.charFilter.bind(this);
-    this.getGeocode = this.getGeocode.bind(this);
+  getAndValidateGeocodes(addresses) {
     this.validAddrType = this.validAddrType.bind(this);
-    this.queryFilter = this.queryFilter.bind(this);
+    this.getGeocode = this.getGeocode.bind(this);
     const {
-      charFilter,
       getGeocode,
       validAddrType,
-      queryFilter,
     } = this;
-    for (let i = 0; i < arr.length; i += 1) {
-      let currAddr = arr[i];
-      currAddr = charFilter(currAddr);
-      currAddr = await getGeocode(currAddr);
-      if (((query && queryFilter(currAddr, query)) || (currAddr && !query)) && validAddrType(currAddr, 'ROOFTOP')) {
-        processedArr.push(currAddr);
-      }
-    }
-    try {
-      return processedArr;
-    } catch (e) {
-      return e;
-    }
+    const geocodes = addresses.map(address => getGeocode(address));
+    return Promise.all(geocodes)
+      .then(results => results
+        .filter(geocode => validAddrType(geocode, 'ROOFTOP')),
+      err => new Error(err));
   },
 };

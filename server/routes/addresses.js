@@ -5,12 +5,11 @@ const router = express.Router();
 module.exports = (db) => {
   router.get('/', async (req, res) => {
     try {
-      const addrArr = await db.all();
-      // this slice is temporary for not going over google api qouta
-      const geocodedArr = await db.addrFilter(addrArr.slice(2, 5), req.query);
+      const addrArr = await db.csvHandler(req.query);
+      const geocodedArr = await db.getAndValidateGeocodes(addrArr);
       res.json(geocodedArr);
     } catch (e) {
-      res.json(e);
+      res.status(500).send(e);
     }
   });
   return router;

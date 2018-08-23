@@ -13,6 +13,7 @@ export default class App extends Component {
     this.state = {
       listVisible: false,
       addresses: [''],
+      filteredAddresses: [''],
       query: '',
       loading: true,
     };
@@ -25,12 +26,14 @@ export default class App extends Component {
     const response = await fetch('/api/addresses');
     let addresses = await response.json();
     if (!Array.isArray(addresses)) {
+      alert(addresses);
       addresses = [];
     }
     const loading = false;
     this.setState({
       addresses,
       loading,
+      filteredAddresses: addresses,
     });
   }
 
@@ -48,14 +51,13 @@ export default class App extends Component {
   }
 
   async filterResults() {
-    const { query } = this.state;
-    const response = await fetch(`/api/addresses/?query=${query}`);
-    let addresses = await response.json();
-    if (!Array.isArray(addresses)) {
-      addresses = [];
-    }
+    const { query, addresses } = this.state;
+    const rgex = new RegExp(query, 'gi');
+    const filteredAddresses = addresses.filter((address) => {
+      return address.formatted_address.match(rgex);
+    });
     this.setState({
-      addresses,
+      filteredAddresses,
     });
   }
 
@@ -63,15 +65,20 @@ export default class App extends Component {
     const { searchBarTyping, switchView } = this;
     const {
       listVisible,
-      addresses,
+      filteredAddresses,
       query,
       loading,
     } = this.state;
     return (
       <div id="view-port">
-        <Menu loading={loading} switchView={switchView} searchBarTyping={searchBarTyping} query={query} />
-        <Map addresses={addresses} />
-        <List listVisible={listVisible} addresses={addresses} />
+        <Menu
+          loading={loading}
+          switchView={switchView}
+          searchBarTyping={searchBarTyping}
+          query={query} 
+        />
+        <Map addresses={filteredAddresses} />
+        <List listVisible={listVisible} addresses={filteredAddresses} />
       </div>);
   }
 }

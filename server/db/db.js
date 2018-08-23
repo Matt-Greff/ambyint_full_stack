@@ -3,24 +3,20 @@ const parse = require('csv-parse');
 const axios = require('axios');
 
 module.exports = {
-  csvHandler({ query }) {
-    const { csvFilter, queryFilter } = this;
+  csvHandler() {
+    const { csvFilter } = this;
     return new Promise((res, rej) => {
       const csvData = new Set();
       fs.createReadStream(`${__dirname}/addresses.csv`)
         .pipe(parse())
         .on('data', async (csvRow) => {
-          // query and parse characters on read to stop redundant api calls
+          // parse characters on read
           const filteredRow = csvFilter(csvRow[0]);
-          if (filteredRow && (!query || queryFilter(filteredRow, query))) csvData.add(filteredRow);
+          if (filteredRow) csvData.add(filteredRow);
         })
         .on('error', e => rej(e))
         .on('end', () => res([...csvData]));
     });
-  },
-  queryFilter(addr, query) {
-    const regExp = new RegExp(query, 'gi');
-    return addr.match(regExp);
   },
   csvFilter(addr) {
     return addr.replace(/“(.*)”/g, '$1');

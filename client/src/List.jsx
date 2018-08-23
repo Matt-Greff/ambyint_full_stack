@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Fade, ListGroup, ListGroupItem } from 'reactstrap';
 
-export default function list({ addresses, listVisible }) {
+export default function List({ addresses, listVisible }) {
   const addressComps = addresses.map(address => (
-    <ListGroupItem key={address} className="full-width">{address}</ListGroupItem>
+    <ListGroupItem key={address.formatted_address} className="full-width">{address.formatted_address}</ListGroupItem>
   ));
   return (
     <Fade in={listVisible} unmountOnExit tag="div">
@@ -15,7 +15,7 @@ export default function list({ addresses, listVisible }) {
   );
 }
 
-list.propTypes = {
-  addresses: propTypes.arrayOf(propTypes.string).isRequired,
+List.propTypes = {
+  addresses: propTypes.arrayOf(propTypes.object).isRequired,
   listVisible: propTypes.bool.isRequired,
 };

@@ -9,7 +9,7 @@ const db = require('./db/db.js');
 const ENV = process.env.ENV || 'production';
 
 // this port needs to match the port in the webapack.config.js -> devServer -> proxy
-const PORT = process.env.API_PORT || 8081;
+const PORT = process.env.PORT || 8081;
 
 const addressRoute = require('./routes/addresses.js');
 

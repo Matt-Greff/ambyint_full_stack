@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "description": "full stack react code challenge",
   "scripts": {
-    "build": "cp -r client/src/public client/build/public && webpack-cli",
+    "build": "cp -r client/src/public client/build/ && webpack-cli",
     "dev": "concurrently --kill-others \"webpack-dev-server\" \"nodemon server/index.js\"",
     "test": "jest --watch && mocha server/tests/*",
     "test-react": "jest --watch",

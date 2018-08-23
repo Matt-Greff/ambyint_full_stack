@@ -1,4 +1,5 @@
 $menu-height: 15vh;
+$left-pane-width: 400px;
 
 body, html
   height: 100%;
@@ -26,50 +27,55 @@ body, html
   height: 100%;
   display: flex;
   justify-content: space-around;
-  #view-port
-    height: 100%;
-    width: 100%;
-    background: white;
-    display: flex;
-    justify-content: space-around;
-    #list
-      margin: 10px
-      margin-top: $menu-height;
-      box-sizing: border-box;
-      border-radius: 10px;
-      width: 780px;
-      height: 80vh;
-      top: 0;
-      overflow: auto;
-    #list::-webkit-scrollbar-track
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	    border-radius: 10px;
-	    background-color: #F5F5F5;
-    #list::-webkit-scrollbar
-	    width: 12px;
-	    background-color: #F5F5F5;
-    #list::-webkit-scrollbar-thumb
-	    border-radius: 10px;
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	    background-color: grey;
-    #map
-      z-index: 0;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-    #menu
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-sizing: border-box;
-      z-index: 1;
-      height: $menu-height;
-      position: absolute;
-      width: 800px;
-      padding: 10px;
-      #toggle
-        height: 45%;
-      #search-bar
-        box-sizing: border-box;
-        height: 45%;
+#view-port
+  height: 100%;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: flex-start;
+#list
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 0 0 10px;
+  margin-top: $menu-height;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: $left-pane-width;
+  height: 80vh;
+  overflow: auto;
+#list::-webkit-scrollbar-track
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+#list::-webkit-scrollbar
+  width: 20px;
+  background-color: #F5F5F5;
+#list::-webkit-scrollbar-thumb
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: grey;
+#map
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  left: 0;
+#menu
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 1;
+  height: $menu-height;
+  position: absolute;
+  width: $left-pane-width;
+  padding: 10px 0 10px 10px;
+  #toggle
+    height: 45%;
+  #search-bar
+    box-sizing: border-box;
+    height: 45%;
+@media screen and (max-width: 480px)
+  #list
+    width: 80%;
+  #menu
+    width: 80%;

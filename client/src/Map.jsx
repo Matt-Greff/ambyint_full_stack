@@ -21,7 +21,7 @@ export default function Map({ addresses }) {
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM' }}
         defaultCenter={defaultCenter}
-        defaultZoom={5}
+        defaultZoom={4}
       >
         {addresses[0] ? locationPins() : <h1>no results</h1>}
       </GoogleMapReact>

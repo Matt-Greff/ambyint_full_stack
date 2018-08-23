@@ -75,7 +75,7 @@ export default class App extends Component {
           loading={loading}
           switchView={switchView}
           searchBarTyping={searchBarTyping}
-          query={query} 
+          query={query}
         />
         <Map addresses={filteredAddresses} />
         <List listVisible={listVisible} addresses={filteredAddresses} />

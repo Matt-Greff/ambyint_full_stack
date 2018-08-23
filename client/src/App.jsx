@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Alert } from 'reactstrap';
 import Menu from './Menu';
 import Map from './Map';
 import List from './List';
@@ -10,9 +11,10 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listVisible: true,
-      addresses: ['Loading...'],
+      listVisible: false,
+      addresses: [''],
       query: '',
+      loading: true,
     };
     this.switchView = this.switchView.bind(this);
     this.filterResults = this.filterResults.bind(this);
@@ -20,11 +22,15 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    this.setState({ addresses: ['fetching data from fake db'] });
     const response = await fetch('/api/addresses');
-    const addresses = await response.json();
+    let addresses = await response.json();
+    if (!Array.isArray(addresses)) {
+      addresses = [];
+    }
+    const loading = false;
     this.setState({
       addresses,
+      loading,
     });
   }
 
@@ -43,8 +49,11 @@ export default class App extends Component {
 
   async filterResults() {
     const { query } = this.state;
-    const response = await fetch(`/api/addresses?query=${query}`);
-    const addresses = await response.json();
+    const response = await fetch(`/api/addresses/?query=${query}`);
+    let addresses = await response.json();
+    if (!Array.isArray(addresses)) {
+      addresses = [];
+    }
     this.setState({
       addresses,
     });
@@ -52,11 +61,16 @@ export default class App extends Component {
 
   render() {
     const { searchBarTyping, switchView } = this;
-    const { listVisible, addresses, query } = this.state;
+    const {
+      listVisible,
+      addresses,
+      query,
+      loading,
+    } = this.state;
     return (
       <div id="view-port">
-        <Menu switchView={switchView} searchBarTyping={searchBarTyping} query={query} />
-        <Map />
+        <Menu loading={loading} switchView={switchView} searchBarTyping={searchBarTyping} query={query} />
+        <Map addresses={addresses} />
         <List listVisible={listVisible} addresses={addresses} />
       </div>);
   }

@@ -1,24 +1,34 @@
+import propTypes from 'prop-types';
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import LocationPin from './LocationPin';
 
-const AnyReactComponent = () => <div>text</div>;
-
-export default function () {
+export default function Map({ addresses }) {
+  const defaultCenter = { lat: 40.475365, lng: -100.397052 };
+  function locationPins() {
+    return addresses.map((address) => {
+      return (
+        <LocationPin
+          key={address.formatted_address}
+          lat={address.location.lat}
+          lng={address.location.lng}
+          text="Kreyser Avrora"
+        />);
+    });
+  }
   return (
-    <div
-      id="map"
-    >
+    <div id="map">
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM' }}
-        defaultCenter={{ lat: 59.95, lng: 30.33 }}
-        defaultZoom={11}
+        defaultCenter={defaultCenter}
+        defaultZoom={5}
       >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="Kreyser Avrora"
-        />
+        {addresses[0] ? locationPins() : <h1>no results</h1>}
       </GoogleMapReact>
     </div>
   );
 }
+
+Map.propTypes = {
+  addresses: propTypes.arrayOf(propTypes.object).isRequired,
+};

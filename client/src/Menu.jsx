@@ -2,10 +2,10 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Button, Input } from 'reactstrap';
 
-export default function menu({ switchView, searchBarTyping, query }) {
+export default function menu({ switchView, searchBarTyping, query, loading }) {
   return (
     <div className="full-width" id="menu">
-      <Button value={query} className="full-width" id="toggle" onClick={() => switchView()}>List View</Button>
+      <Button value={query} className="full-width" id="toggle" onClick={() => switchView()}>{loading ? 'Fetching Addresses..' : 'Toggle List View'}</Button>
       <Input onChange={searchBarTyping} className="full-width" id="search-bar" />
     </div>
   );
@@ -15,4 +15,5 @@ menu.propTypes = {
   switchView: propTypes.func.isRequired,
   searchBarTyping: propTypes.func.isRequired,
   query: propTypes.string.isRequired,
+  loading: propTypes.bool.isRequired,
 };

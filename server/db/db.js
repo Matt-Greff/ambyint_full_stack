@@ -1,56 +1,23 @@
 const fs = require('fs');
 const parse = require('csv-parse');
-const axios = require('axios');
 
 module.exports = {
-  csvHandler() {
-    const { csvFilter } = this;
+  _csvHandler(fileToParse) {
+    const { _csvFilter } = this;
     return new Promise((res, rej) => {
       const csvData = new Set();
-      fs.createReadStream(`${__dirname}/addresses.csv`)
+      fs.createReadStream(`${__dirname}/${fileToParse}`)
+        .on('error', e => rej(e))
         .pipe(parse())
-        .on('data', async (csvRow) => {
-          // parse characters on read
-          const filteredRow = csvFilter(csvRow[0]);
+        .on('data', (csvRow) => {
+          // parse characters on read and removes dublipates by using a Set
+          const filteredRow = _csvFilter(csvRow[0]);
           if (filteredRow) csvData.add(filteredRow);
         })
-        .on('error', e => rej(e))
         .on('end', () => res([...csvData]));
     });
   },
-  csvFilter(addr) {
+  _csvFilter(addr) {
     return addr.replace(/“(.*)”/g, '$1');
-  },
-  getGeocode(addr) {
-    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM`)
-      .then(({ data }) => {
-        const { results, status } = data;
-        if (data.status !== 'OK') return { status };
-        const { formatted_address, geometry } = results[0];
-        const { location, location_type } = geometry;
-        const geocodedAddr = {
-          formatted_address,
-          location,
-          location_type,
-          status,
-        };
-        return geocodedAddr;
-      }, err => new Error(err));
-  },
-  validAddrType(addr, type) {
-    return addr.location_type === type;
-  },
-  getAndValidateGeocodes(addresses) {
-    this.validAddrType = this.validAddrType.bind(this);
-    this.getGeocode = this.getGeocode.bind(this);
-    const {
-      getGeocode,
-      validAddrType,
-    } = this;
-    const geocodes = addresses.map(address => getGeocode(address));
-    return Promise.all(geocodes)
-      .then(results => results
-        .filter(geocode => validAddrType(geocode, 'ROOFTOP')),
-      err => new Error(err));
   },
 };

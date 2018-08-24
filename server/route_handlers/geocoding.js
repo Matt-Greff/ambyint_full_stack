@@ -5,7 +5,7 @@ module.exports = {
     return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyCykpqmbXtfdpUecLZlA--ftOLQJ-xOLgM`)
       .then(({ data }) => {
         const { results, status } = data;
-        if (data.status !== 'OK') return { status };
+        if (status !== 'OK') return { status };
         const { formatted_address, geometry } = results[0];
         const { location, location_type } = geometry;
         const geoAddr = {
@@ -25,7 +25,7 @@ module.exports = {
     this._getGeocode = this._getGeocode.bind(this);
     const { locationType } = options;
     const { _getGeocode, _validLocationType } = this;
-    const geocodes = addresses.map(address => _getGeocode(address));
+    const geocodes = addresses.map(addr => _getGeocode(addr));
     const unfilteredGeos = await Promise.all(geocodes);
     return locationType
       ? unfilteredGeos.filter(geo => _validLocationType(geo, locationType))

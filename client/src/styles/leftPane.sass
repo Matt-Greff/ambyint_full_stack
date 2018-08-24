@@ -1,0 +1,53 @@
+$menu-height: 15vh;
+$left-pane-width: 400px;
+#menu
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 1;
+  height: $menu-height;
+  position: absolute;
+  width: $left-pane-width;
+  padding: 10px 0 10px 10px;
+  #toggle
+    height: 45%;
+  #search-bar
+    box-sizing: border-box;
+    height: 45%;
+.notify
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  height: fit-content;
+  width: $left-pane-width - 10px;
+  margin: $menu-height 0 0 10px
+  padding: 10px 0 10px 10px;
+#list
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 0 0 10px;
+  margin-top: $menu-height;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: $left-pane-width;
+  height: 80vh;
+  overflow: auto;
+#list::-webkit-scrollbar-track
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+#list::-webkit-scrollbar
+  width: 20px;
+  background-color: #F5F5F5;
+#list::-webkit-scrollbar-thumb
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: grey;
+@media screen and (max-width: 480px)
+  #list
+    width: 80%;
+  #menu
+    width: 80%;

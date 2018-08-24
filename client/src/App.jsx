@@ -50,12 +50,12 @@ export default class App extends Component {
     this.filterResults();
   }
 
-  async filterResults() {
+  filterResults() {
     const { query, addresses } = this.state;
     const rgex = new RegExp(query, 'gi');
-    const filteredAddresses = addresses.filter((address) => {
-      return address.formatted_address.match(rgex);
-    });
+    const filteredAddresses = addresses.filter(({ formatted_address }) => (
+      formatted_address.match(rgex)
+    ));
     this.setState({
       filteredAddresses,
     });
@@ -79,6 +79,7 @@ export default class App extends Component {
         />
         <Map addresses={filteredAddresses} />
         <List listVisible={listVisible} addresses={filteredAddresses} />
-      </div>);
+      </div>
+    );
   }
 }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Alert } from 'reactstrap';
 import Menu from './Menu';
 import Map from './Map';
 import List from './List';
+import Notification from './Notification';
 import 'bootstrap/dist/css/bootstrap.css';
 
 require('./styles/app.sass');
+require('./styles/map.sass');
+require('./styles/leftPane.sass');
 
 export default class App extends Component {
   constructor(props) {
@@ -15,7 +17,7 @@ export default class App extends Component {
       addresses: [''],
       filteredAddresses: [''],
       query: '',
-      loading: true,
+      notification: { message: 'Loading...', type: 'primary' },
     };
     this.switchView = this.switchView.bind(this);
     this.filterResults = this.filterResults.bind(this);
@@ -24,17 +26,17 @@ export default class App extends Component {
 
   async componentDidMount() {
     const response = await fetch('/api/addresses');
-    let addresses = await response.json();
-    if (!Array.isArray(addresses)) {
-      alert(addresses);
-      addresses = [];
+    const { addresses, status, err } = await response.json();
+    if (status === 'OK') {
+      const message = '';
+      this.setState({
+        notification: { message },
+        addresses,
+        filteredAddresses: addresses,
+      });
+    } else {
+      this.setState({ notification: { message: err, type: 'danger' } });
     }
-    const loading = false;
-    this.setState({
-      addresses,
-      loading,
-      filteredAddresses: addresses,
-    });
   }
 
   switchView() {
@@ -56,8 +58,12 @@ export default class App extends Component {
     const filteredAddresses = addresses.filter(({ formatted_address }) => (
       formatted_address.match(rgex)
     ));
+    const notification = filteredAddresses < 1
+      ? { message: 'No Results Found...', type: 'warning' }
+      : { message: '' };
     this.setState({
       filteredAddresses,
+      notification,
     });
   }
 
@@ -67,18 +73,21 @@ export default class App extends Component {
       listVisible,
       filteredAddresses,
       query,
-      loading,
+      notification,
     } = this.state;
     return (
       <div id="view-port">
         <Menu
-          loading={loading}
           switchView={switchView}
           searchBarTyping={searchBarTyping}
           query={query}
         />
+        {
+          notification.message
+            ? <Notification notification={notification} />
+            : <List listVisible={listVisible} addresses={filteredAddresses} />
+        }
         <Map addresses={filteredAddresses} />
-        <List listVisible={listVisible} addresses={filteredAddresses} />
       </div>
     );
   }

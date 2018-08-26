@@ -4,8 +4,9 @@ import { Alert } from 'reactstrap';
 
 export default function Notification({ notification }) {
   const { message, type } = notification;
+  const isOpen = message !== null;
   return (
-    <Alert className="notify" color={type}>
+    <Alert isOpen={isOpen} className="notify" color={type}>
       {message}
     </Alert>
   );

@@ -6,7 +6,7 @@ import LocationPin from './LocationPin';
 export default function Map({ addresses }) {
   const defaultCenter = { lat: 40.475365, lng: -100.397052 };
   function locationPins() { // eslint-disable-line
-    if (addresses[0]) {
+    if (addresses) {
       return addresses.map(address => (
         <LocationPin
           key={address.formatted_address}
@@ -30,5 +30,9 @@ export default function Map({ addresses }) {
 }
 
 Map.propTypes = {
-  addresses: propTypes.arrayOf(propTypes.object).isRequired,
+  addresses: propTypes.arrayOf(propTypes.object),
+};
+
+Map.defaultProps = {
+  addresses: null,
 };

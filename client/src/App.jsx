@@ -14,9 +14,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       listVisible: false,
-      addresses: [''],
-      filteredAddresses: [''],
-      query: '',
+      addresses: null,
+      filteredAddresses: null,
       notification: { message: 'Loading...', type: 'primary' },
     };
     this.switchView = this.switchView.bind(this);
@@ -28,7 +27,7 @@ export default class App extends Component {
     const response = await fetch('/api/addresses');
     const { addresses, status, err } = await response.json();
     if (status === 'OK') {
-      const message = '';
+      const message = null;
       this.setState({
         notification: { message },
         addresses,
@@ -46,24 +45,27 @@ export default class App extends Component {
     });
   }
 
-  async searchBarTyping(e) {
+  searchBarTyping(e) {
     const { value } = e.target;
-    await this.setState({ query: value });
-    this.filterResults();
+    this.filterResults(value);
   }
 
-  filterResults() {
-    const { query, addresses } = this.state;
+  filterResults(query) {
+    const { addresses } = this.state;
     const rgex = new RegExp(query, 'gi');
     const filteredAddresses = addresses.filter(({ formatted_address }) => (
       formatted_address.match(rgex)
     ));
-    const notification = filteredAddresses < 1
-      ? { message: 'No Results Found...', type: 'warning' }
-      : { message: '' };
+    let notification = { message: null };
+    let listVisible = true;
+    if (filteredAddresses < 1) {
+      notification = { message: 'No Results Found...', type: 'warning' };
+      listVisible = false;
+    }
     this.setState({
       filteredAddresses,
       notification,
+      listVisible,
     });
   }
 
@@ -82,11 +84,8 @@ export default class App extends Component {
           searchBarTyping={searchBarTyping}
           query={query}
         />
-        {
-          notification.message
-            ? <Notification notification={notification} />
-            : <List listVisible={listVisible} addresses={filteredAddresses} />
-        }
+        <List listVisible={listVisible} addresses={filteredAddresses} />
+        <Notification notification={notification} />
         <Map addresses={filteredAddresses} />
       </div>
     );

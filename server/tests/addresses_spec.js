@@ -7,10 +7,10 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('App', () => {
-  describe('/api/example', () => {
+  describe('/', () => {
     it('responds with status 200', (done) => {
       chai.request(app)
-        .get('/api/example')
+        .get('/api/addresses')
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();

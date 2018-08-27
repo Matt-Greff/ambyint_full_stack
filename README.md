@@ -24,7 +24,7 @@ To make a new build for express to serve.
 `yarn test-react` and `yarn test-express` will run front-end and back-end tests respectively.
 
 ## Upcoming
- * More Unit Testing.
+* finished for now
 
 ## Currently Working
 
@@ -52,14 +52,8 @@ The current file structure is somewhat opinionated, it is really just to give an
 ### Functional Requirements
 * completed...
 ### Wouldn't It Be Cool If...
-#### Server
-* more Unit testing
-* refactor
-* better error handling
 #### Client
-* more Unit Testing.
-* display alerts for no results, server error, etc.
-
+* zoom to address when clicked on either in the list or on the location pin itself... 
 ---
 Based on:
 * [Boilerplate/template](https://github.com/matt-greff/web-boilerplate)

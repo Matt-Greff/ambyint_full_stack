@@ -8,10 +8,10 @@ copy example environment to local environment and install dependencies.
 `cp config/.example.env .env && yarn install`
 
 To start webpack-dev server and express server cuncurrently.
-`yarn dev`
+`yarn dev` dev server available on port `8080`
 
 To start express-server.
-`yarn start`
+`yarn start` express server is available on port `8081`
 
 To make a new build for express to serve.
 `yarn build`

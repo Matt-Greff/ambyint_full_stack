@@ -49,6 +49,41 @@ The current file structure is somewhat opinionated, it is really just to give an
 * renders map pins/markers and renders list of addresses
 * sorts visible addresses based on search query
 
+## Dependencies
+  * axios: ^0.18.0,
+  * babel: ^6.26.0,
+  * body-parser: ^1.18.3,
+  * bootstrap: ^4.1.3,
+  * css-loader: ^0.28.11,
+  * csv: ^3.1.0,
+  * csv-parse: ^2.5.0,
+  * dotenv: ^4.0.0,
+  * express: ^4.16.3,
+  * express-history-api-fallback: ^2.2.1,
+  * google-map-react: ^1.0.6,
+  * jquery: ^3.3.1,
+  * lodash: ^4.17.10,
+  * node-sass: ^4.9.0,
+  * prop-types: ^15.6.2,
+  * react: ^16.3.2,
+  * react-dom: ^16.3.2,
+  * react-transition-group: ^2.4.0,
+  * reactstrap: ^6.4.0,
+  * webpack: ^4.6.0,
+
+## Dev Dependencies
+  * babel-jest: ^23.4.2,
+  * chai: ^4.1.2,
+  * chai-http: ^4.0.0,
+  * concurrently: ^3.5.1,
+  * enzyme: ^3.4.4,
+  * eslint: ^5.4.0,
+  * identity-obj-proxy: ^3.0.0,
+  * jest: ^23.5.0,
+  * mocha: ^5.2.0,
+  * nodemon: ^1.18.3,
+  * webpack-dev-server: ^3.1.3
+
 ### Functional Requirements
 * completed...
 ### Wouldn't It Be Cool If...
